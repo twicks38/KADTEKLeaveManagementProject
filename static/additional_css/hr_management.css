@@ -34,6 +34,29 @@
     transform: translateX(-50%);
   }
 
+  /* Table Action */
+  .table-action {
+    text-align: center !important;
+  }
+
+  /* Back Button top of screen */
+  .back-button {
+    display: inline-block;
+    padding: 8px 14px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .back-button:hover {
+    font-weight: 700;
+  }
+
+  #password-requests-back-btn {
+    margin-bottom: 20px;
+  }
+
   /* ==================================================
      Main collapsible container
   ================================================== */
@@ -340,9 +363,597 @@
      IDs
   ================================================== */
 
+<<<<<<< HEAD
   /* Table Action */
   #action {
     text-align: center !important;
+=======
+  .user-list-description {
+    max-width: 100%;
+    margin: auto 0;
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ==================================================
+     User management table
+  ================================================== */
+
+  .user-management-table th,
+  .user-management-table td {
+    vertical-align: middle;
+  }
+
+  .user-management-table th {
+    white-space: nowrap;
+  }
+
+  .user-management-table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+
+  .user-management-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+
+  /* ==================================================
+     User account status
+  ================================================== */
+
+  .user-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .user-status-active {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  .user-status-disabled {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* ==================================================
+     User management actions
+  ================================================== */
+
+  .user-manage-button,
+  .user-manage-button:link,
+  .user-manage-button:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    background-color: #2563eb;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    color: #ffffff !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .user-manage-button:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  }
+
+  .user-manage-button:active {
+    background-color: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(0);
+  }
+
+  .user-manage-button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 3px;
+  }
+
+  /* ==================================================
+   User search and filters
+================================================== */
+
+  .user-filter-form {
+    width: 100%;
+    margin-top: 28px;
+    padding: 25px 30px;
+    background-color: #ffffff;
+    border: 1px solid #dbe4f0;
+    border-top: 5px solid #2563eb;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+  }
+
+  .user-search-field {
+    margin-bottom: 20px;
+  }
+
+  .user-filter-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .user-filter-form input,
+  .user-filter-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #1f2937;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+  }
+
+  .user-filter-form input:focus,
+  .user-filter-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  .user-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .user-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .user-filter-clear,
+  .user-filter-clear:link,
+  .user-filter-clear:visited {
+    padding: 10px 18px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #475569 !important;
+    font-size: 0.95rem !important;
+    font-weight: 600;
+    text-decoration: none !important;
+  }
+
+  .user-filter-clear:hover {
+    background-color: #f1f5f9;
+    color: #1e293b !important;
+  }
+
+  .user-filter-submit {
+    padding: 11px 20px;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .user-filter-submit:hover {
+    background-color: #1d4ed8;
+  }
+
+  /* ==================================================
+   Empty user search
+  ================================================== */
+
+  .user-search-empty-state {
+    margin-top: 24px;
+    padding: 45px 30px;
+    background-color: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    color: #64748b;
+    text-align: center;
+  }
+
+  .user-search-empty-state h2 {
+    margin: 0 0 8px;
+    color: #334155;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .user-search-empty-state p {
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
+>>>>>>> 71f08b6 (HR Management: User Create, Modify, Disable.)
+  }
+
+  /* ==================================================
+    Create / Modify user form
+    ================================================== */
+
+  .user-create-container {
+    margin: 1rem 0 0;
+  }
+
+  .user-management-form {
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 2rem 0;
+    margin: auto;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    width: min(760px, 75%);
+  }
+
+  /* ==================================================
+    Progress steps
+    ================================================== */
+
+  .user-step-indicator {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .user-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 130px;
+    color: #bebebe;
+  }
+
+  .user-step span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    font-weight: 600;
+  }
+
+  .user-step p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .user-step.active {
+    color: #7500c0;
+  }
+
+  .user-step.active p {
+    color: #000;
+  }
+
+  .user-step.active span {
+    border-color: #7500c0;
+    color: #fff;
+    background-color: #7500c0;
+  }
+
+  .user-step.complete span {
+    border-color: #7500c0;
+    color: #7500c0;
+  }
+
+  .user-step-line {
+    width: 150px;
+    height: 2px;
+    margin-top: 18px;
+    background-color: #ddd;
+  }
+
+  /* ==================================================
+    Form steps
+    ================================================== */
+
+  .user-form-step {
+    display: none;
+    margin: 0 4rem;
+  }
+
+  .user-form-step.active {
+    display: block;
+  }
+
+  .user-form-section-header {
+    margin-bottom: 1.5rem;
+    color: #242424;
+  }
+
+  .user-form-section-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  .user-form-section-header p {
+    margin: 0.4rem 0 0;
+    color: #667085;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  /* ==================================================
+    Fields
+    ================================================== */
+
+  .user-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+  }
+
+  .user-form-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-form-field-full {
+    grid-column: 1 / -1;
+  }
+
+  .user-form-field label {
+    margin-bottom: 0.45rem;
+    color: #344054;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .user-form-field input,
+  .user-form-field select {
+    width: 100%;
+    min-height: 42px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    background-color: #fff;
+    font: inherit;
+    box-sizing: border-box;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    font-weight: 600;
+  }
+
+  .user-form-field input:hover,
+  .user-form-field select:hover {
+    border-color: #98a2b3;
+  }
+
+  .user-form-field input:focus,
+  .user-form-field select:focus {
+    border-color: #7500c0;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(117, 0, 192, 0.1);
+  }
+
+  /* ==================================================
+    Validation
+    ================================================== */
+
+  .user-form-field .errorlist {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    color: #b42318;
+    font-size: 0.85rem;
+    list-style: none;
+  }
+
+  .user-form-errors {
+    margin-bottom: 1.25rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid #fecdca;
+    border-radius: 7px;
+    background-color: #fef3f2;
+    color: #b42318;
+  }
+
+  /* ==================================================
+    Form buttons
+    ================================================== */
+
+  .user-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #eaecf0;
+  }
+
+  .user-form-next,
+  .user-form-back,
+  .user-form-submit,
+  .user-form-cancel {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    min-height: 40px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 7px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .user-form-next,
+  .user-form-submit {
+    border: 1px solid #7500c0;
+    background-color: #7500c0;
+    color: #fff;
+  }
+
+  .user-form-next:hover,
+  .user-form-submit:hover {
+    border-color: #5f009c;
+    background-color: #5f009c;
+  }
+
+  .user-form-back,
+  .user-form-cancel {
+    border: 1px solid #d0d5dd;
+    background-color: #fff;
+    color: #344054;
+  }
+
+  .user-form-back:hover,
+  .user-form-cancel:hover {
+    background-color: #f9fafb;
+  }
+
+  /* ==================================================
+    User management action buttons
+  ================================================== */
+
+  .user-management-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .user-status-form {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+  }
+
+  .user-manage-button,
+  .user-disable-button,
+  .user-enable-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    min-width: 80px;
+    height: 38px;
+    min-height: 38px;
+    margin: 0;
+    padding: 0 14px;
+    border-radius: 8px !important;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  /* Modify */
+
+  .user-manage-button,
+  .user-manage-button:link,
+  .user-manage-button:visited {
+    border: 1px solid #2563eb;
+    background-color: #2563eb;
+    color: #ffffff !important;
+  }
+
+  .user-manage-button:hover {
+    border-color: #1d4ed8;
+    background-color: #1d4ed8;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Disable */
+
+  .user-disable-button {
+    border: 1px solid #dc2626;
+    background-color: #dc2626;
+    color: #ffffff;
+  }
+
+  .user-disable-button:hover {
+    border-color: #b91c1c;
+    background-color: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+  }
+
+  /* Enable */
+
+  .user-enable-button {
+    border: 1px solid #16a34a;
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+
+  .user-enable-button:hover {
+    border-color: #15803d;
+    background-color: #15803d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2);
+  }
+
+  .user-manage-button:active,
+  .user-disable-button:active,
+  .user-enable-button:active {
+    transform: translateY(0);
+  }
+  /* ==================================================
+    Responsive form
+    ================================================== */
+
+  @media (max-width: 700px) {
+    .user-create-container {
+      width: 100%;
+    }
+
+    .user-management-form {
+      padding: 1.25rem;
+    }
+
+    .user-form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .user-form-field-full {
+      grid-column: auto;
+    }
+
+    .user-step-line {
+      width: 60px;
+    }
+
+    .user-step {
+      min-width: 100px;
+    }
   }
 
   /* ==================================================
