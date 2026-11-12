@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load group_tags %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'additional_css/manage_leave_request.css' %}">
+<link rel="stylesheet" href="{% static 'additional_css/calendar.css' %}">
+{% endblock %}
+{% block title %}Approve Leave{% endblock %}
+
+{% block content %}
+<div class="leave-request-body, whitespace-body">
+
+    <div class="calendar-request-container">
+        <div class="calendar-page-header">
+            <h1>Leave Requested</h1>
+        </div>
+        <p class="content">Employee: <span class="spacing">{{ leave_request.user.first_name }} {{ leave_request.user.last_name }}</span></p>
+        <p class="content">Leave Type: <span class="spacing">{{leave_request.get_leave_type_display }}</span></p>
+    </div>
+
+    <div class="calendar-container">
+        <div class="calendar-nav">
+
+            <a href="{% url 'leave_management:view_leave_request' leave_request.id%}?month={{ prev_month }}&year={{ prev_year }}"
+            class="calendar-button">Previous Month</a>
+
+            <h2>{{ month_name }} {{ year }}</h2>
+
+            <a href="{% url 'leave_management:view_leave_request' leave_request.id%}?month={{ next_month }}&year={{ next_year }}"
+            class="calendar-button">Next Month</a>
+
+
+        </div>
+        <div class="calendar">
+            <div class="calendar-header">
+                <div>Sunday</div>
+                <div>Monday</div>
+                <div>Tuesday</div>
+                <div>Wednesday</div>
+                <div>Thursday</div>
+                <div>Friday</div>
+                <div>Saturday</div>
+            </div>
+
+            <div class="calendar-body">
+                {% for week in calendar_weeks %}
+                    <div class="calendar-week" style="--lane-count: {{ week.lane_count }};">
+                        {% for day in week.days %}
+                            <div class="calendar-day
+                                {% if not day.is_current_month %}
+                                    other-month
+                                {% endif %}">
+                            
+                                {% if day.day %}
+                                    <div class="day-number">
+                                        {{day.day}}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        {% for segment in week.leave_segments %}
+                            <div class="leave-bar 
+                                {% if segment.requesting %}
+                                    leave-viewing-request
+                                {% else %}
+                                    leave-{{ segment.leave_request.status|lower|slugify }}
+                                {% endif %}"
+                                style="--start-column: {{ segment.start_column }};
+                                --span: {{segment.span }};
+                                --lane: {{segment.lane}}; ">
+                                {% if segment.continues_into_previous_month %}
+                                    <span class="leave-arrow previous">&#8592; Previous Month</span>
+                                {% endif %}
+                                {% if team_calendar %}
+                                    <span class="name">
+                                        {% if segment.leave_request.user == request.user %}
+                                            <strong>My Leave</strong>
+                                        {% else %}
+                                            <strong>
+                                                {{ segment.leave_request.user.first_name }} {{ segment.leave_request.user.last_name }}
+                                            </strong>
+                                        {% endif %}
+                                    </span>
+                                {% endif %}
+                                <strong>
+                                    {{ segment.leave_request.get_leave_type_display }}
+                                </strong>
+                                <span>
+                                    {{ segment.leave_request.get_status_display}}
+                                </span>
+                                {% if segment.continues_into_next_month %}
+                                    <span class="leave-arrow next">Next Month &#8594;</span>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        
+
+    <div class="button-container">
+        <a class="button-link" href="{% url 'leave_management:approve_leave' leave_request.id %}">
+            <button class="accept">Approve</button>
+        </a>
+        <a class="button-link" href="rejection-reason" data-bs-toggle="modal" data-bs-target="#rejectionModal">
+            <button class="reject" type="submit">Reject</button>
+        </a>
+    </div>
+</div>
+
+
+<div class="modal fade" id="rejectionModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Rejection Reason
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'leave_management:reject_leave' leave_request.id %}">
+                {% csrf_token %}
+                <textarea class="rejection-area" name="rejection-reason_area"></textarea>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-danger">Reject Leave</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

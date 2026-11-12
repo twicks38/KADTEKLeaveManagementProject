@@ -248,6 +248,7 @@
     padding: 2rem;
   }
 
+
   .leave-request-form button {
     width: 100%;
     margin-top: 12px;
@@ -316,6 +317,21 @@
 
   .leave-table tbody tr:last-child {
     border-bottom: none;
+  }
+
+  .approval-button{
+    width: 150px;
+    height: 40px;
+    border-radius: 30px !important;
+    background-color: white;
+    border-color: #0b5ed7;
+    border-style: solid;
+    transition: 0.25s;
+  }
+
+  .approval-button:hover{
+    background-color: #0b5ed7;
+    color: white;
   }
 
   .empty-state {

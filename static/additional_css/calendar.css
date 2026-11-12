@@ -185,7 +185,7 @@
   white-space: nowrap;
   box-sizing: border-box;
   background: white;
-  border-left: 4px solid #2563eb;
+  border-left: 4px solid;
   border-radius: 7px;
   color: #1e3a8a;
   font-size: 0.72rem;
@@ -209,6 +209,12 @@
   color: #047857;
 }
 
+.leave-viewing-request{
+    border-left: 4px solid #2563eb;
+    background-color: #bdd2ff;
+    color: #1e3a8a;
+}
+
 .leave-pending {
   background: #fffbeb;
   border-left-color: #f59e0b;
@@ -220,4 +226,62 @@
 
 .name > strong {
   color: black !important;
+}
+
+.content{
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.spacing{
+  font-weight: 400;
+  margin-left: 20px;
+}
+
+.calendar-container{
+  margin-top: 35px;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.accept, .reject{
+  width: 200px;
+  margin: 10px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.accept:hover, .reject:hover{
+  transform: translateY(-2px);
+}
+
+.accept{
+  background-color: #00a11b;
+}
+
+.reject{
+  background-color: #ff0000;
+}
+
+.accept:hover{
+  background-color: #16b631;
+}
+
+.reject:hover{
+  background-color: #f22121;
+}
+
+.rejection-area{
+    margin-left: 10px;
+    margin-right: 20px;
+    height: 200px;
+    width: 96%;
 }

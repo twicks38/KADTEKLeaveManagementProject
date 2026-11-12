@@ -3,11 +3,17 @@ from datetime import datetime
 from leave_management.models import LeaveRequest
 from hr_management.models import TeamMembership
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
-def calendar_service(request, team_calendar):
+def calendar_service(request, team_calendar, leave_request=None):
     #Gets current month as default changes with user navigation
-    month = int(request.GET.get('month', datetime.today().month))
-    year = int(request.GET.get('year', datetime.today().year))
+    if leave_request is not None:
+        month = int(request.GET.get('month', leave_request.start_date.month))
+        year = int(request.GET.get('year', leave_request.start_date.year))
+
+    else:
+        month = int(request.GET.get('month', datetime.today().month))
+        year = int(request.GET.get('year', datetime.today().year))
  
     calendar_start = calendar.Calendar(firstweekday=calendar.SUNDAY) #defines calendar shoould start on sunday
     month_calendar = calendar_start.monthdatescalendar(year, month) #sets which month the calendar is on
@@ -56,6 +62,8 @@ def calendar_service(request, team_calendar):
             #Adds records to list
             all_user_requests.extend(user_request)
 
+            
+
 
     calendar_weeks = [] #all of the weeks in the calendar will be stored here
 
@@ -81,16 +89,16 @@ def calendar_service(request, team_calendar):
 
         leave_segments = [] #this holds all of the leave request for the interface to use to place on calendar
 
-        for leave_request in week_request:
+        for current_leave in week_request:
             #Gets the start of the leave segment
-            segment_start = max(leave_request.start_date,
+            segment_start = max(current_leave.start_date,
                                 week_start,
                                 first_day
                 )
 
             #gets the end of the leave segment 
             segment_end = min(
-                leave_request.end_date,
+                current_leave.end_date,
                 week_end,
                 last_day
             )
@@ -102,11 +110,14 @@ def calendar_service(request, team_calendar):
             start_column = (segment_start - week_start).days
             span = (segment_end - segment_start).days + 1 #determines how long the leave bar should be
 
+
+
             leave_segments.append({ #adds them to the segmentws as a dictionary to use in the interface
-                "leave_request":leave_request,
+                "leave_request":current_leave,
                 "start_column":start_column,
                 "span": span,
-                "end_column": start_column + span -1
+                "end_column": start_column + span -1,
+                "requesting": (leave_request is not None and current_leave.id == leave_request.id)
             })
 
 
