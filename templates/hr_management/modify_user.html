@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Modify User
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'additional_css/hr_management.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="whitespace-body">
+
+    <div class="hr-page-header">
+        <h1>Modify User</h1>
+    </div>
+
+    <div class="user-list-description">
+        <p>
+            Update {{ managed_user.username }}'s account,
+            employment and access information.
+        </p>
+    </div>
+
+    <div class="user-create-container">
+
+        <div class="user-step-indicator">
+
+            <div
+                class="user-step active"
+                id="step-indicator-1"
+            >
+                <span>1</span>
+                <p>Account Details</p>
+            </div>
+
+            <div class="user-step-line"></div>
+
+            <div
+                class="user-step"
+                id="step-indicator-2"
+            >
+                <span>2</span>
+                <p>Employment Details</p>
+            </div>
+
+        </div>
+
+        <form
+            method="post"
+            class="user-management-form"
+            id="modify-user-form"
+        >
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="user-form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <!-- ==========================================
+                 Account details
+            =========================================== -->
+
+            <div
+                class="user-form-step active"
+                id="user-step-1"
+            >
+
+                <div class="user-form-section-header">
+                    <h2>Account Details</h2>
+
+                    <p>
+                        Update the user's account and
+                        personal details.
+                    </p>
+                </div>
+
+                <div class="user-form-grid">
+
+                    <div class="user-form-field">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                        {{ form.last_name.errors }}
+                    </div>
+
+                </div>
+
+                <div class="user-form-actions">
+
+                    <a
+                        href="{% url 'hr_management:user_list' %}"
+                        class="user-form-cancel"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="button"
+                        class="user-form-next"
+                        id="next-step"
+                    >
+                        Next
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 Employment details
+            =========================================== -->
+
+            <div
+                class="user-form-step"
+                id="user-step-2"
+            >
+
+                <div class="user-form-section-header">
+                    <h2>Employment Details</h2>
+
+                    <p>
+                        Update the user's employment,
+                        team and role information.
+                    </p>
+                </div>
+
+                <div class="user-form-grid">
+
+                    <div class="user-form-field">
+                        {{ form.job_title.label_tag }}
+                        {{ form.job_title }}
+                        {{ form.job_title.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                                                {{ form.start_date.label_tag }}
+                        {{ form.start_date }}
+                        {{ form.start_date.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                        {{ form.working_days.label_tag }}
+                        {{ form.working_days }}
+                        {{ form.working_days.errors }}
+                    </div>
+
+                    <div class="user-form-field">
+                        {{ form.team.label_tag }}
+                        {{ form.team }}
+                        {{ form.team.errors }}
+                    </div>
+
+                    <div class="user-form-field user-form-field-full">
+                        {{ form.role.label_tag }}
+                        {{ form.role }}
+                        {{ form.role.errors }}
+                    </div>
+
+                </div>
+
+                <div class="user-form-actions">
+
+                    <button
+                        type="button"
+                        class="user-form-back"
+                        id="previous-step"
+                    >
+                        Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="user-form-submit"
+                    >
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    const nextButton =
+        document.getElementById("next-step");
+
+    const previousButton =
+        document.getElementById("previous-step");
+
+    const stepOne =
+        document.getElementById("user-step-1");
+
+    const stepTwo =
+        document.getElementById("user-step-2");
+
+    const indicatorOne =
+        document.getElementById("step-indicator-1");
+
+    const indicatorTwo =
+        document.getElementById("step-indicator-2");
+
+    nextButton.addEventListener("click", function () {
+        const accountFields = stepOne.querySelectorAll(
+            "input[required], select[required]"
+        );
+
+        for (const field of accountFields) {
+            if (!field.checkValidity()) {
+                field.reportValidity();
+                return;
+            }
+        }
+
+        stepOne.classList.remove("active");
+        stepTwo.classList.add("active");
+
+        indicatorOne.classList.remove("active");
+        indicatorOne.classList.add("complete");
+        indicatorTwo.classList.add("active");
+    });
+
+    previousButton.addEventListener("click", function () {
+        stepTwo.classList.remove("active");
+        stepOne.classList.add("active");
+
+        indicatorTwo.classList.remove("active");
+
+        indicatorOne.classList.remove("complete");
+        indicatorOne.classList.add("active");
+    });
+</script>
+
+{% endblock %}
+                 

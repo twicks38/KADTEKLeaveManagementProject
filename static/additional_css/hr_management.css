@@ -39,6 +39,24 @@
     text-align: center !important;
   }
 
+  /* Back Button top of screen */
+  .back-button {
+    display: inline-block;
+    padding: 8px 14px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .back-button:hover {
+    font-weight: 700;
+  }
+
+  #password-requests-back-btn {
+    margin-bottom: 20px;
+  }
+
   /* ==================================================
      Main collapsible container
   ================================================== */
@@ -346,8 +364,8 @@
   ================================================== */
 
   .user-list-description {
-    max-width: 720px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: auto 0;
     color: #64748b;
     font-size: 1rem;
     line-height: 1.6;
@@ -540,7 +558,7 @@
 
   /* ==================================================
    Empty user search
-================================================== */
+  ================================================== */
 
   .user-search-empty-state {
     margin-top: 24px;
@@ -563,6 +581,373 @@
     max-width: 550px;
     margin: 0 auto;
     line-height: 1.6;
+  }
+
+  /* ==================================================
+    Create / Modify user form
+    ================================================== */
+
+  .user-create-container {
+    margin: 1rem 0 0;
+  }
+
+  .user-management-form {
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 2rem 0;
+    margin: auto;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    width: min(760px, 75%);
+  }
+
+  /* ==================================================
+    Progress steps
+    ================================================== */
+
+  .user-step-indicator {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .user-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 130px;
+    color: #bebebe;
+  }
+
+  .user-step span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #fff;
+    font-weight: 600;
+  }
+
+  .user-step p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .user-step.active {
+    color: #7500c0;
+  }
+
+  .user-step.active p {
+    color: #000;
+  }
+
+  .user-step.active span {
+    border-color: #7500c0;
+    color: #fff;
+    background-color: #7500c0;
+  }
+
+  .user-step.complete span {
+    border-color: #7500c0;
+    color: #7500c0;
+  }
+
+  .user-step-line {
+    width: 150px;
+    height: 2px;
+    margin-top: 18px;
+    background-color: #ddd;
+  }
+
+  /* ==================================================
+    Form steps
+    ================================================== */
+
+  .user-form-step {
+    display: none;
+    margin: 0 4rem;
+  }
+
+  .user-form-step.active {
+    display: block;
+  }
+
+  .user-form-section-header {
+    margin-bottom: 1.5rem;
+    color: #242424;
+  }
+
+  .user-form-section-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+
+  .user-form-section-header p {
+    margin: 0.4rem 0 0;
+    color: #667085;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  /* ==================================================
+    Fields
+    ================================================== */
+
+  .user-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+  }
+
+  .user-form-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-form-field-full {
+    grid-column: 1 / -1;
+  }
+
+  .user-form-field label {
+    margin-bottom: 0.45rem;
+    color: #344054;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .user-form-field input,
+  .user-form-field select {
+    width: 100%;
+    min-height: 42px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #d0d5dd;
+    border-radius: 7px;
+    background-color: #fff;
+    font: inherit;
+    box-sizing: border-box;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    font-weight: 600;
+  }
+
+  .user-form-field input:hover,
+  .user-form-field select:hover {
+    border-color: #98a2b3;
+  }
+
+  .user-form-field input:focus,
+  .user-form-field select:focus {
+    border-color: #7500c0;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(117, 0, 192, 0.1);
+  }
+
+  /* ==================================================
+    Validation
+    ================================================== */
+
+  .user-form-field .errorlist {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    color: #b42318;
+    font-size: 0.85rem;
+    list-style: none;
+  }
+
+  .user-form-errors {
+    margin-bottom: 1.25rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid #fecdca;
+    border-radius: 7px;
+    background-color: #fef3f2;
+    color: #b42318;
+  }
+
+  /* ==================================================
+    Form buttons
+    ================================================== */
+
+  .user-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #eaecf0;
+  }
+
+  .user-form-next,
+  .user-form-back,
+  .user-form-submit,
+  .user-form-cancel {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    min-height: 40px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 7px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .user-form-next,
+  .user-form-submit {
+    border: 1px solid #7500c0;
+    background-color: #7500c0;
+    color: #fff;
+  }
+
+  .user-form-next:hover,
+  .user-form-submit:hover {
+    border-color: #5f009c;
+    background-color: #5f009c;
+  }
+
+  .user-form-back,
+  .user-form-cancel {
+    border: 1px solid #d0d5dd;
+    background-color: #fff;
+    color: #344054;
+  }
+
+  .user-form-back:hover,
+  .user-form-cancel:hover {
+    background-color: #f9fafb;
+  }
+
+  /* ==================================================
+    User management action buttons
+  ================================================== */
+
+  .user-management-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .user-status-form {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+  }
+
+  .user-manage-button,
+  .user-disable-button,
+  .user-enable-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    min-width: 80px;
+    height: 38px;
+    min-height: 38px;
+    margin: 0;
+    padding: 0 14px;
+    border-radius: 8px !important;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  /* Modify */
+
+  .user-manage-button,
+  .user-manage-button:link,
+  .user-manage-button:visited {
+    border: 1px solid #2563eb;
+    background-color: #2563eb;
+    color: #ffffff !important;
+  }
+
+  .user-manage-button:hover {
+    border-color: #1d4ed8;
+    background-color: #1d4ed8;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Disable */
+
+  .user-disable-button {
+    border: 1px solid #dc2626;
+    background-color: #dc2626;
+    color: #ffffff;
+  }
+
+  .user-disable-button:hover {
+    border-color: #b91c1c;
+    background-color: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
+  }
+
+  /* Enable */
+
+  .user-enable-button {
+    border: 1px solid #16a34a;
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+
+  .user-enable-button:hover {
+    border-color: #15803d;
+    background-color: #15803d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(22, 163, 74, 0.2);
+  }
+
+  .user-manage-button:active,
+  .user-disable-button:active,
+  .user-enable-button:active {
+    transform: translateY(0);
+  }
+  /* ==================================================
+    Responsive form
+    ================================================== */
+
+  @media (max-width: 700px) {
+    .user-create-container {
+      width: 100%;
+    }
+
+    .user-management-form {
+      padding: 1.25rem;
+    }
+
+    .user-form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .user-form-field-full {
+      grid-column: auto;
+    }
+
+    .user-step-line {
+      width: 60px;
+    }
+
+    .user-step {
+      min-width: 100px;
+    }
   }
 
   /* ==================================================
