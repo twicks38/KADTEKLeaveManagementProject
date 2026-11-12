@@ -35,16 +35,19 @@ class ProfileService:
                 user=user,
                 active=True
             )
-            .select_related(
-                "team",
-                "role"
-            )
+            .select_related("team")
             .first()
         )
 
         return {
             "profile": user.profile,
             "team_membership": team_membership,
+            "role_names": ", ".join(
+                user.groups.values_list(
+                    "name",
+                    flat=True
+                )
+            ) or "Not assigned",
             "total_entitlement": entitlement.total_entitlement,
             "days_taken": leave_calculations.get_days_taken(user),
             "remaining_leave": leave_calculations.get_remaining_leave(user),
@@ -66,8 +69,7 @@ class ProfileService:
             )
             .select_related(
                 "team",
-                "team__manager",
-                "role"
+                "team__manager"
             )
             .first()
         )
@@ -75,6 +77,12 @@ class ProfileService:
         return {
             "profile": user.profile,
             "team_membership": team_membership,
+            "role_names": ", ".join(
+                user.groups.values_list(
+                    "name",
+                    flat=True
+                )
+            ) or "Not assigned",
         }
 
 

@@ -10,8 +10,21 @@ class TeamAdmin(admin.ModelAdmin):
 
 @admin.register(TeamMembership)
 class TeamMembershipAdmin(admin.ModelAdmin):
-    list_display = ("user", "team", "role", "date_joined", "active")
-    list_filter = ("team", "role", "active")
-    search_fields = ("user__username", "user__email", "team__name", "role__name")
-    ordering = ("team", "user__username")
+    list_display = (
+        "user",
+        "team",
+        "active",
+        "date_joined",
+    )
 
+    list_filter = (
+        "team",
+        "active",
+    )
+
+    search_fields = (
+        "user__username",
+        "user__first_name",
+        "user__last_name",
+        "team__name",
+    )

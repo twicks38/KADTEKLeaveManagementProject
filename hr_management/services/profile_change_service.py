@@ -115,7 +115,6 @@ class ProfileChangeService:
                 user=user,
                 active=True
             )
-            .select_related("role")
             .first()
         )
 
@@ -130,9 +129,6 @@ class ProfileChangeService:
                 "The user is already assigned to the requested team."
             )
 
-        # Preserve the user's existing role when moving teams.
-        current_role = current_membership.role
-
         current_membership.active = False
 
         current_membership.save(update_fields=["active"])
@@ -140,7 +136,6 @@ class ProfileChangeService:
         TeamMembership.objects.create(
             user=user,
             team=requested_team,
-            role=current_role,
             active=True
         )
 

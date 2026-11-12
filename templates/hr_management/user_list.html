@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Existing Users
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'additional_css/hr_management.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+
+<div class="whitespace-body">
+
+    <div class="hr-page-header">
+        <h1>Existing Users</h1>
+    </div>
+
+    <div class="user-list-description">
+        <p>
+            Search and filter existing user accounts to view
+            their employment and access information.
+        </p>
+    </div>
+
+    <!-- ==================================================
+         User search and filters
+    ================================================== -->
+
+    <form method="get" class="user-filter-form">
+
+        <div class="user-search-field">
+
+            <label for="user-search">
+                Search Users
+            </label>
+
+            <input
+                type="search"
+                id="user-search"
+                name="search"
+                value="{{ search }}"
+                placeholder="Search by username or name"
+            >
+
+        </div>
+
+        <div class="user-filter-grid">
+
+            <div class="user-filter-field">
+
+                <label for="status">
+                    Account Status
+                </label>
+
+                <select id="status" name="status">
+
+                    <option value="">
+                        All statuses
+                    </option>
+
+                    <option
+                        value="active"
+                        {% if selected_status == "active" %}
+                            selected
+                        {% endif %}
+                    >
+                        Active
+                    </option>
+
+                    <option
+                        value="disabled"
+                        {% if selected_status == "disabled" %}
+                            selected
+                        {% endif %}
+                    >
+                        Disabled
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="user-filter-field">
+
+                <label for="team">
+                    Team
+                </label>
+
+                <select id="team" name="team">
+
+                    <option value="">
+                        All teams
+                    </option>
+
+                    {% for team in teams %}
+
+                        <option
+                            value="{{ team.id }}"
+                            {% if selected_team == team.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ team.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="user-filter-field">
+
+                <label for="role">
+                    Role
+                </label>
+
+                <select id="role" name="role">
+
+                    <option value="">
+                        All roles
+                    </option>
+
+                    {% for role in roles %}
+
+                        <option
+                            value="{{ role.id }}"
+                            {% if selected_role == role.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ role.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="user-filter-actions">
+
+            <a
+                href="{% url 'hr_management:user_list' %}"
+                class="user-filter-clear"
+            >
+                Clear
+            </a>
+
+            <button
+                type="submit"
+                class="user-filter-submit"
+            >
+                Search Users
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- ==================================================
+         User results
+    ================================================== -->
+
+    {% if has_filters %}
+
+        <div class="table-wrapper mt-4">
+
+            <table class="leave-table user-management-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Team</th>
+                        <th>Role</th>
+                        <th>Working Days</th>
+                        <th>Status</th>
+                        <th id="action">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for item in users %}
+
+                        <tr>
+
+                            <td>
+                                {{ item.user.username }}
+                            </td>
+
+                            <td>
+                                {% if item.user.first_name or item.user.last_name %}
+                                    {{ item.user.first_name }}
+                                    {{ item.user.last_name }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if item.profile %}
+                                    {{ item.profile.job_title }}
+                                {% else %}
+                                    No profile
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if item.team_membership %}
+                                    {{ item.team_membership.team.name }}
+                                {% else %}
+                                    Not assigned
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {{ item.role_names }}
+                            </td>
+
+                            <td>
+                                {% if item.profile and item.profile.working_days %}
+                                    {{ item.profile.working_days }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </td>
+
+                            <td>
+
+                                {% if item.user.is_active %}
+
+                                    <span class="user-status user-status-active">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="user-status user-status-disabled">
+                                        Disabled
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td id="action">
+
+                                <a
+                                    href="#"
+                                    class="user-manage-button"
+                                >
+                                    Manage
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+                            <td
+                                colspan="8"
+                                class="empty-state"
+                            >
+                                No users matched your search or filters.
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <div class="user-search-empty-state">
+
+            <h2>Find a user</h2>
+
+            <p>
+                Enter a username or name, or select one or more
+                filters above to find existing users.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
