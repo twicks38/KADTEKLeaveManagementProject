@@ -96,11 +96,11 @@
             {% if request.user|user_type:"Manager" %}
               <li class="nav-item">
                 <a class="nav-link
-                {% if request.resolver_match.url_name == 'team_calendar' %}
+                {% if request.resolver_match.url_name == 'manager_dashboard' %}
                 active
                 {% endif %}
-                " href="{% url 'leave_management:team_calendar' %}">
-                  Team Calendar
+                " href="{% url 'leave_management:manager_dashboard' %}">
+                  Manager Dashboard
                 </a>
               </li>
             {% endif %}

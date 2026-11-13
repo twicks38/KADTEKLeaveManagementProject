@@ -10,7 +10,12 @@
 
 <div class="whitespace-body">
     <div class="calendar-page-header">
-        <h1>Calendar</h1>
+        {% if team_calendar %}
+            <h1>Team Calendar</h1>
+        {% else %}
+            <h1>Calendar</h1>
+        {% endif %}
+        
     </div>
     <div class="calendar-container">
         <div class="calendar-nav">
