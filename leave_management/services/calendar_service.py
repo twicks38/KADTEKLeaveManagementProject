@@ -38,28 +38,30 @@ def calendar_service(request, team_calendar, leave_request=None):
     #If it is a team calendar run code below
     else:
         #gets the team ID of the manager logged in
-        team_id = TeamMembership.objects.get(
-            user = request.user,
+        team_membership = TeamMembership.objects.filter(
+            user=request.user,
             active=True
-        ).team_id
+        ).first()
 
-        #Gets the employees apart of the same team as the manager
-        employees = User.objects.filter(
-            teammembership__team=team_id,
-            teammembership__active = True
-        ).distinct()
+        if team_membership:
+            team_id = team_membership.team_id
 
-     
-        for employee in employees: #Loops through each employee and gets leave records
-            user_request = LeaveRequest.objects.filter(
-                user=employee,
-                start_date__lte = last_day,
-                end_date__gte = first_day,
-                status__in = ["Approved", "Pending"],
-            ).order_by("start_date")
+            #Gets the employees apart of the same team as the manager
+            employees = User.objects.filter(
+                teammembership__team=team_id,
+                teammembership__active=True
+            ).distinct()
 
-            #Adds records to list
-            all_user_requests.extend(user_request)
+            for employee in employees: #Loops through each employee and gets leave records
+                user_request = LeaveRequest.objects.filter(
+                    user=employee,
+                    start_date__lte=last_day,
+                    end_date__gte=first_day,
+                    status__in=["Approved", "Pending"],
+                ).order_by("start_date")
+
+                #Adds records to list
+                all_user_requests.extend(user_request)
 
             
 

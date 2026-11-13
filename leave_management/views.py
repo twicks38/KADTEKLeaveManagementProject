@@ -131,24 +131,32 @@ def leave_request_approval(request):
     if not request.user.groups.filter(name="Manager").exists():
         return HttpResponseForbidden()
 
-    team = TeamMembership.objects.get(
-        user = request.user,
-        role__name="Manager",
-        active = True
-    ).team
+    team_membership = TeamMembership.objects.filter(
+        user=request.user,
+        active=True
+    ).first()
 
-    employees = User.objects.filter(
-        teammembership__team=team,
-        teammembership__active = True
+    if team_membership:
+        employees = User.objects.filter(
+            teammembership__team=team_membership.team,
+            teammembership__active=True
+        ).distinct()
+
+        team_leave = LeaveRequest.objects.filter(
+            user__in=employees,
+            status="Pending"
+        ).exclude(
+            user=request.user
+        ).order_by("start_date")
+
+    else:
+        team_leave = LeaveRequest.objects.none()
+
+    return render(
+        request,
+        'leave_management/request_list_page.html',
+        {"team_leave": team_leave}
     )
-
-    team_leave = LeaveRequest.objects.filter(
-        user__in=employees,
-        status="Pending"
-    ).exclude(user=request.user).order_by("start_date")
-
-
-    return render(request, 'leave_management/request_list_page.html', {"team_leave":team_leave})
 
 @login_required
 def view_leave_request(request, leave_id):
