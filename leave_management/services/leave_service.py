@@ -105,7 +105,8 @@ class LeaveRequestService:
     @staticmethod
     @transaction.atomic
     def approve_leave_request(leave_request, approver):
-
+        if leave_request.status != "Pending":
+            raise ValidationError("Only pending leave requests can be approved.")
         leave_request.status = "Approved"
         leave_request.approved_by = approver
         leave_request.approved_at = date.today()
@@ -122,6 +123,8 @@ class LeaveRequestService:
     @staticmethod
     @transaction.atomic
     def reject_leave_request(leave_request, approver, rejection_reason):
+        if leave_request.status != "Pending":
+            raise ValidationError("Only pending leave requests can be approved.")
         if leave_request.leave_type =="Annual":
             entitlement = Entitlement.objects.get(user=leave_request.user, holiday_year=leave_request.start_date.year)
             entitlement.days_taken -= (leave_request.total_days)
