@@ -103,6 +103,7 @@
 
     <div class="button-container">
         <a class="button-link" href="{% url 'leave_management:approve_leave' leave_request.id %}">
+            {% csrf_token %}
             <button class="accept">Approve</button>
         </a>
         <a class="button-link" href="rejection-reason" data-bs-toggle="modal" data-bs-target="#rejectionModal">
