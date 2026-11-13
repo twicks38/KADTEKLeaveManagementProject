@@ -40,9 +40,8 @@ def calendar_service(request, team_calendar, leave_request=None):
         #gets the team ID of the manager logged in
         team_id = TeamMembership.objects.get(
             user = request.user,
-            role__name = "Manager",
             active=True
-        ).team
+        ).team_id
 
         #Gets the employees apart of the same team as the manager
         employees = User.objects.filter(
