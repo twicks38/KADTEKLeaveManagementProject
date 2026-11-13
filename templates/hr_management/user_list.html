@@ -15,7 +15,10 @@ Existing Users
 {% block content %}
 
 <div class="whitespace-body">
-
+    
+    <a href="{% url 'hr_management:hr_dashboard' %}" class="back-button">
+        ← Back to HR Management
+    </a>
     <div class="hr-page-header">
         <h1>Existing Users</h1>
     </div>
@@ -185,7 +188,7 @@ Existing Users
                         <th>Role</th>
                         <th>Working Days</th>
                         <th>Status</th>
-                        <th id="action">Actions</th>
+                        <th class="table-action">Actions</th>
                     </tr>
 
                 </thead>
@@ -255,16 +258,53 @@ Existing Users
 
                             </td>
 
-                            <td id="action">
+                            <td class="table-action">
+
+                            <div class="user-management-actions">
 
                                 <a
-                                    href="#"
+                                    href="{% url 'hr_management:modify_user' item.user.id %}"
                                     class="user-manage-button"
                                 >
-                                    Manage
+                                    Modify
                                 </a>
 
-                            </td>
+                                {% if item.user != request.user %}
+
+                                    <form
+                                        method="post"
+                                        action="{% url 'hr_management:change_user_status' item.user.id %}"
+                                        class="user-status-form"
+                                    >
+                                        {% csrf_token %}
+
+                                        {% if item.user.is_active %}
+
+                                            <button
+                                                type="submit"
+                                                class="user-disable-button"
+                                            >
+                                                Disable
+                                            </button>
+
+                                        {% else %}
+
+                                            <button
+                                                type="submit"
+                                                class="user-enable-button"
+                                            >
+                                                Enable
+                                            </button>
+
+                                        {% endif %}
+
+                                    </form>
+
+                                {% endif %}
+
+                            </div>
+
+                        </td>
 
                         </tr>
 
