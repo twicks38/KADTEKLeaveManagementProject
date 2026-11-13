@@ -57,6 +57,29 @@
     margin-bottom: 20px;
   }
 
+  /* Table Action */
+  .table-action {
+    text-align: center !important;
+  }
+
+  /* Back Button top of screen */
+  .back-button {
+    display: inline-block;
+    padding: 8px 14px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .back-button:hover {
+    font-weight: 700;
+  }
+
+  #password-requests-back-btn {
+    margin-bottom: 20px;
+  }
+
   /* ==================================================
      Main collapsible container
   ================================================== */
