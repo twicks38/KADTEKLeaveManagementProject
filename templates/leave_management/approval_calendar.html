@@ -8,7 +8,7 @@
 {% block title %}Approve Leave{% endblock %}
 
 {% block content %}
-<div class="leave-request-body, whitespace-body">
+<div class="leave-request-body whitespace-body">
 
     <div class="calendar-request-container">
         <div class="calendar-page-header">
@@ -123,7 +123,7 @@
             </div>
             <form method="post" action="{% url 'leave_management:reject_leave' leave_request.id %}">
                 {% csrf_token %}
-                <textarea class="rejection-area" name="rejection-reason_area"></textarea>
+                <textarea class="rejection-area" name="rejection_reason_area"></textarea>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cancel

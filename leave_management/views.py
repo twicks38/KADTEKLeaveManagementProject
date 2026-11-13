@@ -150,7 +150,7 @@ def leave_request_approval(request):
 
     return render(request, 'leave_management/request_list_page.html', {"team_leave":team_leave})
 
-
+@login_required
 def view_leave_request(request, leave_id):
     if not request.user.groups.filter(name="Manager").exists():
         return HttpResponseForbidden()
@@ -165,14 +165,20 @@ def view_leave_request(request, leave_id):
 
     return render(request, 'leave_management/approval_calendar.html', context)
 
-
+@login_required
 def approve_leave(request, leave_id):
+    if not request.user.groups.filter(name="Manager").exists():
+        return HttpResponseForbidden()
+    
     leave_request = get_object_or_404(LeaveRequest, id = leave_id)
     LeaveRequestService.approve_leave_request(leave_request, request.user)
     return redirect ('leave_management:manager_dashboard')
 
-
+@login_required
 def reject_leave(request, leave_id):
+    if not request.user.groups.filter(name="Manager").exists():
+        return HttpResponseForbidden()
+    
     rejection_reason = request.GET.get('rejection_reason_area')
     leave_request = get_object_or_404(LeaveRequest, id = leave_id)
     LeaveRequestService.reject_leave_request(leave_request, request.user, rejection_reason)
