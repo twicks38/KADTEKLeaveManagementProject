@@ -30,10 +30,6 @@ class TeamMembership(models.Model):
         Team,
         on_delete=models.CASCADE
     )
-    role = models.ForeignKey(
-        Group,
-        on_delete=models.CASCADE
-    )
     date_joined = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
 
@@ -41,7 +37,6 @@ class TeamMembership(models.Model):
         return (
             f"({self.user.username} - "
             f"{self.team.name} - "
-            f"{self.role.name})"
         )
 
 

@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from .services.password_reset_service import PasswordResetService
 from .services.permission_service import PermissionService as Perms
 from .services.profile_change_service import ProfileChangeService
+from .services.user_management_service import UserManagementService
 
 # ==================================================
 # HR dashboard
@@ -226,4 +227,71 @@ def reject_profile_change(request, request_id):
 
     return redirect(
         "hr_management:profile_change_requests"
+    )
+
+# ==================================================
+# List existing users
+# ==================================================
+
+@login_required
+def user_list(request):
+    if not Perms.is_hr_superuser(request.user):
+        return HttpResponseForbidden(
+            "You do not have permission to manage users."
+        )
+
+    search = request.GET.get(
+        "search",
+        ""
+    ).strip()
+
+    status = request.GET.get(
+        "status",
+        ""
+    )
+
+    team = request.GET.get(
+        "team",
+        ""
+    )
+
+    role = request.GET.get(
+        "role",
+        ""
+    )
+
+    has_filters = bool(
+        search
+        or status
+        or team
+        or role
+    )
+
+    context = (
+        UserManagementService
+        .get_user_filter_options()
+    )
+
+    context.update({
+        "search": search,
+        "selected_status": status,
+        "selected_team": team,
+        "selected_role": role,
+        "has_filters": has_filters,
+        "users": (
+            UserManagementService.get_users(
+                search=search,
+                status=status,
+                team=team,
+                role=role,
+            )
+            if has_filters
+            else []
+        ),
+    })
+
+    return render(
+        request,
+        "hr_management/user_list.html",
+        context,
     )

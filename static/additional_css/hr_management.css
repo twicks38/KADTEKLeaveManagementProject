@@ -34,6 +34,11 @@
     transform: translateX(-50%);
   }
 
+  /* Table Action */
+  .table-action {
+    text-align: center !important;
+  }
+
   /* ==================================================
      Main collapsible container
   ================================================== */
@@ -337,12 +342,227 @@
   }
 
   /* ==================================================
-     IDs
+     User list description
   ================================================== */
 
-  /* Table Action */
-  #action {
-    text-align: center !important;
+  .user-list-description {
+    max-width: 720px;
+    margin: 0 auto;
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ==================================================
+     User management table
+  ================================================== */
+
+  .user-management-table th,
+  .user-management-table td {
+    vertical-align: middle;
+  }
+
+  .user-management-table th {
+    white-space: nowrap;
+  }
+
+  .user-management-table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+
+  .user-management-table tbody tr:hover {
+    background-color: #f8fafc;
+  }
+
+  /* ==================================================
+     User account status
+  ================================================== */
+
+  .user-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .user-status-active {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  .user-status-disabled {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* ==================================================
+     User management actions
+  ================================================== */
+
+  .user-manage-button,
+  .user-manage-button:link,
+  .user-manage-button:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    background-color: #2563eb;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    color: #ffffff !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .user-manage-button:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  }
+
+  .user-manage-button:active {
+    background-color: #1e40af;
+    border-color: #1e40af;
+    transform: translateY(0);
+  }
+
+  .user-manage-button:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 3px;
+  }
+
+  /* ==================================================
+   User search and filters
+================================================== */
+
+  .user-filter-form {
+    width: 100%;
+    margin-top: 28px;
+    padding: 25px 30px;
+    background-color: #ffffff;
+    border: 1px solid #dbe4f0;
+    border-top: 5px solid #2563eb;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+  }
+
+  .user-search-field {
+    margin-bottom: 20px;
+  }
+
+  .user-filter-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .user-filter-form input,
+  .user-filter-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #1f2937;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+  }
+
+  .user-filter-form input:focus,
+  .user-filter-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  .user-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .user-filter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .user-filter-clear,
+  .user-filter-clear:link,
+  .user-filter-clear:visited {
+    padding: 10px 18px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #475569 !important;
+    font-size: 0.95rem !important;
+    font-weight: 600;
+    text-decoration: none !important;
+  }
+
+  .user-filter-clear:hover {
+    background-color: #f1f5f9;
+    color: #1e293b !important;
+  }
+
+  .user-filter-submit {
+    padding: 11px 20px;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .user-filter-submit:hover {
+    background-color: #1d4ed8;
+  }
+
+  /* ==================================================
+   Empty user search
+================================================== */
+
+  .user-search-empty-state {
+    margin-top: 24px;
+    padding: 45px 30px;
+    background-color: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    color: #64748b;
+    text-align: center;
+  }
+
+  .user-search-empty-state h2 {
+    margin: 0 0 8px;
+    color: #334155;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .user-search-empty-state p {
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
   /* ==================================================
@@ -371,8 +591,12 @@
       grid-template-columns: 1fr;
     }
 
+    .user-management-table {
+      min-width: 1000px;
+    }
+
     /*
-     * Reset the centred final-card layout when the
+     * Resets the centred final-card layout when the
      * dashboard changes to a single-column layout.
      */
     .dashboard-grid .dashboard-option:last-child:nth-child(odd) {
@@ -386,6 +610,21 @@
 
     .dashboard-option-title {
       font-size: 1.5rem;
+    }
+
+    .user-filter-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .user-filter-actions {
+      align-items: stretch;
+      flex-direction: column-reverse;
+    }
+
+    .user-filter-clear,
+    .user-filter-submit {
+      width: 100%;
+      text-align: center;
     }
   }
 

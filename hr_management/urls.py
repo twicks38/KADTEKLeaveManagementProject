@@ -37,4 +37,11 @@ urlpatterns = [
         name="reject_profile_change"
     ),
     # End
+
+    # User Management
+    path(
+    "users/",
+    views.user_list,
+    name="user_list"
+    ),
 ]

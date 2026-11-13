@@ -382,7 +382,7 @@
   .table-wrapper {
     background: white;
     border-radius: 14px;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 }
