@@ -639,7 +639,7 @@
   }
 
   .user-step.active {
-    color: #7500c0;
+    color: #2563eb;
   }
 
   .user-step.active p {
@@ -647,14 +647,14 @@
   }
 
   .user-step.active span {
-    border-color: #7500c0;
+    border-color: #2563eb;
     color: #fff;
-    background-color: #7500c0;
+    background-color: #2563eb;
   }
 
   .user-step.complete span {
-    border-color: #7500c0;
-    color: #7500c0;
+    border-color: #2563eb;
+    color: #2563eb;
   }
 
   .user-step-line {
@@ -743,7 +743,7 @@
 
   .user-form-field input:focus,
   .user-form-field select:focus {
-    border-color: #7500c0;
+    border-color: #2563eb;
     outline: none;
     box-shadow: 0 0 0 3px rgba(117, 0, 192, 0.1);
   }
@@ -793,9 +793,11 @@
     min-width: 100px;
     min-height: 40px;
     padding: 0.6rem 1.2rem;
-    border-radius: 7px;
-    font: inherit;
+    border-radius: 7px !important;
+    font-family: inherit;
+    font-size: 1rem !important;
     font-weight: 600;
+    line-height: 1;
     text-decoration: none;
     cursor: pointer;
     box-sizing: border-box;
@@ -803,27 +805,37 @@
 
   .user-form-next,
   .user-form-submit {
-    border: 1px solid #7500c0;
-    background-color: #7500c0;
+    border: 1px solid #2563eb;
+    background-color: #2563eb;
     color: #fff;
   }
 
   .user-form-next:hover,
   .user-form-submit:hover {
-    border-color: #5f009c;
-    background-color: #5f009c;
+    border-color: #1545ac;
+    background-color: #1545ac;
   }
 
   .user-form-back,
-  .user-form-cancel {
+  .user-form-back:link,
+  .user-form-back:visited,
+  .user-form-cancel,
+  .user-form-cancel:link,
+  .user-form-cancel:visited {
     border: 1px solid #d0d5dd;
     background-color: #fff;
-    color: #344054;
+    color: #344054 !important;
+    font-size: inherit;
+    line-height: normal;
+    text-decoration: none !important;
   }
 
   .user-form-back:hover,
   .user-form-cancel:hover {
+    border-color: #d0d5dd;
     background-color: #f9fafb;
+    color: #344054 !important;
+    text-decoration: none !important;
   }
 
   /* ==================================================
