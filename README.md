@@ -46,9 +46,21 @@ When a branch has been pushed and is ready to be merged, a merge request can be 
 9. click on the github link and submit a merge review.
 10. ask for reviews then merge in when you have one review.
 
-## Starting project for testing.
+##
 
-_use `py` instead of `python` for some python versions_
+# Starting project / for testing.
+
+### Prerequisites:
+
+- IDE installed (Recommended: Visual Studio Code)
+- Python 3+ installed
+
+#### Notes:
+
+- _The commands are ran in the terminal in your IDE_
+- _use `py` instead of `python` for some python versions_
+
+Open up your IDE and follow the steps below.
 
 To install all the latest requirements type:
 
