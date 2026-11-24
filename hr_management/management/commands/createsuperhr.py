@@ -10,6 +10,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
 from accounts.models import UserProfile
+from leave_management.services.entitlement_service import EntitlementCalculations
 
 
 class Command(BaseCommand):
@@ -218,6 +219,7 @@ class Command(BaseCommand):
             )
 
             user.groups.add(role)
+            EntitlementCalculations().check_entitlement_record(user)
 
         # ==================================================
         # Success
