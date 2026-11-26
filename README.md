@@ -72,6 +72,14 @@ Once installed, run
 and
 `python manage.py migrate`
 
+To create a SuperHR account for testing
+(useful if no accounts exist) type:
+
+`python manage.py createsuperhr`
+
+then follow the steps, this will be your account with
+the permissions to create/modify other users.
+
 then you can run the server by doing
 
 `python manage.py runserver`

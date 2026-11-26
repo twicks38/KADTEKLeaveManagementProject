@@ -4,6 +4,7 @@ from django.db.models import Q
 
 from hr_management.models import Team, TeamMembership
 from accounts.models import UserProfile
+from leave_management.services.entitlement_service import EntitlementCalculations
 
 
 class UserManagementService:
@@ -229,6 +230,8 @@ class UserManagementService:
                 user=user,
                 role=data["role"],
             )
+
+        EntitlementCalculations().check_entitlement_record(user)
 
         return user
 
